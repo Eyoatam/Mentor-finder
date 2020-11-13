@@ -11,6 +11,7 @@
 			></base-badge>
 			<p>{{ description }}</p>
 		</base-card>
+		<router-view></router-view>
 	</section>
 </template>
 
