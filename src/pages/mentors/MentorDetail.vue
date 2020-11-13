@@ -11,13 +11,6 @@
 			></base-badge>
 			<p>{{ description }}</p>
 		</base-card>
-		<base-card>
-			<header>
-				<h2>Want To Share Your Issue? Reach Out Now!</h2>
-				<base-button link :to="contactLink">Contact</base-button>
-			</header>
-			<router-view></router-view>
-		</base-card>
 	</section>
 </template>
 

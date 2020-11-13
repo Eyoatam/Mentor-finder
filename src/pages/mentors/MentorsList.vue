@@ -1,16 +1,22 @@
 <template>
+	<base-dialog :show="!!error" title="An Error Occured!" @close="handleError">
+		<p>{{ error }}</p>
+	</base-dialog>
 	<section>
 		<mentor-filter @change-filter="setFilters"></mentor-filter>
 	</section>
 	<section>
 		<base-card>
 			<div class="controls">
-				<base-button mode="outlined">Refresh</base-button>
-				<base-button v-if="!isMentor" link to="/register"
+				<base-button mode="outlined" @click="loadMentors">Refresh</base-button>
+				<base-button v-if="!isMentor && !isLoading" link to="/register"
 					>register as a coach</base-button
 				>
 			</div>
-			<ul v-if="hasMentors">
+			<div v-if="isLoading">
+				<base-spinner></base-spinner>
+			</div>
+			<ul v-else-if="hasMentors">
 				<mentor-item
 					v-for="mentor in filteredMentors"
 					:key="mentor.id"
@@ -36,6 +42,8 @@ export default {
 	},
 	data() {
 		return {
+			isLoading: false,
+			error: null,
 			activeFilters: {
 				motivational: true,
 				spiritual: true,
@@ -69,13 +77,28 @@ export default {
 			});
 		},
 		hasMentors() {
-			return this.$store.getters['mentors/hasMentors'];
+			return !this.isLoading && this.$store.getters['mentors/hasMentors'];
 		},
 	},
 	methods: {
+		async loadMentors() {
+			this.isLoading = true;
+			try {
+				await this.$store.dispatch('mentors/loadMentors');
+			} catch (error) {
+				this.error = error.message || 'Something went wrong!';
+			}
+			this.isLoading = false;
+		},
+		handleError() {
+			this.error = null;
+		},
 		setFilters(updatedFilters) {
 			this.activeFilters = updatedFilters;
 		},
+	},
+	created() {
+		this.loadMentors();
 	},
 };
 </script>

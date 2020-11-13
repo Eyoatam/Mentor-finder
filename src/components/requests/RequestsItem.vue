@@ -60,6 +60,7 @@ p {
 	top: -30px;
 	right: -16px;
 	z-index: 1;
+	animation: tooltip 0.2s ease-in-out;
 }
 
 .tooltip:hover .tooltiptext {
