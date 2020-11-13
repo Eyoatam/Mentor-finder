@@ -1,7 +1,7 @@
 export default {
   addNewMentor(context, payload) {
     const mentorData = {
-      id: 'm3',
+      id: context.rootGetters.userId,
       firstName: payload.first,
       lastName: payload.last,
       description: payload.desc,

@@ -16,6 +16,7 @@ export default {
 	methods: {
 		submitData(formData) {
 			this.$store.dispatch('mentors/addNewMentor', formData);
+			this.$router.replace('/mentors');
 		},
 	},
 };
