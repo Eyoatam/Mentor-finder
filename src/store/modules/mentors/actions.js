@@ -9,7 +9,7 @@ export default {
     };
 
     const response = await fetch(
-      `https://mentor-finder-9fb3b.firebaseio.com/mentors/${userId}.json`,
+      `https://mentor-finder-9fb3b.firebaseio.com/mentors/${userId}.jso`,
       {
         method: 'PUT',
         body: JSON.stringify(mentorData)

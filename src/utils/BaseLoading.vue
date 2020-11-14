@@ -1,4 +1,5 @@
 <template>
+	<div class="backdrop"></div>
 	<div class="bouncer">
 		<div class="bounce1"></div>
 		<div class="bounce2"></div>
@@ -7,8 +8,18 @@
 </template>
 
 <style scoped>
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 10;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
 .bouncer {
-	margin: 20px auto 0;
+	margin: 100px auto 0;
 	width: 70px;
 	text-align: center;
 }

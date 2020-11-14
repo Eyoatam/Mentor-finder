@@ -27,7 +27,7 @@
 					:areas="mentor.areas"
 				></mentor-item>
 			</ul>
-			<h3 v-else>No Coaches Found</h3>
+			<h3 v-else>No Mentors Found</h3>
 		</base-card>
 	</section>
 </template>
