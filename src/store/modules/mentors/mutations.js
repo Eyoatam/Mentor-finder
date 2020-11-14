@@ -4,5 +4,8 @@ export default {
   },
   fetchMentors(state, payload) {
     state.mentors = payload;
+  },
+  setTimestamp(state) {
+    state.lastFetch = new Date().getTime();
   }
 };

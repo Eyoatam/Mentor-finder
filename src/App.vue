@@ -1,6 +1,10 @@
 <template>
 	<the-header></the-header>
-	<router-view></router-view>
+	<router-view v-slot="slotProps">
+		<transition name="route-animate" mode="out-in">
+			<component :is="slotProps.Component"></component>
+		</transition>
+	</router-view>
 </template>
 
 <script>
@@ -26,5 +30,29 @@ html {
 body {
 	margin: 0;
 	background: #eee;
+}
+
+.route-animate-enter-from {
+	opacity: 0;
+	transform: translateY(-30px);
+}
+
+.route-animate-leave-to {
+	opacity: 0;
+	transform: translateY(30px);
+}
+
+.route-animate-enter-active {
+	transition: all 300ms ease-in-out;
+}
+
+.route-animate-leave-active {
+	transition: all 300ms ease-in;
+}
+
+.route-animate-enter-to,
+.route-animate-leave-from {
+	opacity: 1;
+	transform: translateY(0px);
 }
 </style>

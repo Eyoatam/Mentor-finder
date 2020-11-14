@@ -29,7 +29,10 @@ export default {
       id: userId
     });
   },
-  async loadMentors(context) {
+  async loadMentors(context, payload) {
+    if (!payload.forceRefresh && !context.getters.updateMentors) {
+      return;
+    }
     const response = await fetch(
       `https://mentor-finder-9fb3b.firebaseio.com/mentors.json`
     );
@@ -52,5 +55,6 @@ export default {
       mentors.push(mentor);
     }
     context.commit('fetchMentors', mentors);
+    context.commit('setTimestamp');
   }
 };

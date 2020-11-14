@@ -9,5 +9,14 @@ export default {
     const mentors = getters.mentors;
     const userId = rootGetters.userId;
     return mentors.some(mentor => mentor.id === userId);
+  },
+  updateMentors(state) {
+    const lastFetch = state.lastFetch;
+    if (!lastFetch) {
+      return true;
+    } else {
+      const currentTimestamp = new Date().getTime();
+      return (currentTimestamp - lastFetch) / 1000 > 60;
+    }
   }
 };

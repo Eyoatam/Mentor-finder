@@ -1,35 +1,39 @@
 <template>
-	<base-dialog :show="!!error" title="An Error Occured!" @close="handleError">
-		<p>{{ error }}</p>
-	</base-dialog>
-	<section>
-		<mentor-filter @change-filter="setFilters"></mentor-filter>
-	</section>
-	<section>
-		<base-card>
-			<div class="controls">
-				<base-button mode="outlined" @click="loadMentors">Refresh</base-button>
-				<base-button v-if="!isMentor && !isLoading" link to="/register"
-					>register as a coach</base-button
-				>
-			</div>
-			<div v-if="isLoading">
-				<base-spinner></base-spinner>
-			</div>
-			<ul v-else-if="hasMentors">
-				<mentor-item
-					v-for="mentor in filteredMentors"
-					:key="mentor.id"
-					:id="mentor.id"
-					:firstName="mentor.firstName"
-					:lastName="mentor.lastName"
-					:rate="mentor.hourlyRate"
-					:areas="mentor.areas"
-				></mentor-item>
-			</ul>
-			<h3 v-else>No Mentors Found</h3>
-		</base-card>
-	</section>
+	<div>
+		<base-dialog :show="!!error" title="An Error Occured!" @close="handleError">
+			<p>{{ error }}</p>
+		</base-dialog>
+		<section>
+			<mentor-filter @change-filter="setFilters"></mentor-filter>
+		</section>
+		<section>
+			<base-card>
+				<div class="controls">
+					<base-button mode="outlined" @click="loadMentors(true)"
+						>Refresh</base-button
+					>
+					<base-button v-if="!isMentor && !isLoading" link to="/register"
+						>register as a coach</base-button
+					>
+				</div>
+				<div v-if="isLoading">
+					<base-spinner></base-spinner>
+				</div>
+				<ul v-else-if="hasMentors">
+					<mentor-item
+						v-for="mentor in filteredMentors"
+						:key="mentor.id"
+						:id="mentor.id"
+						:firstName="mentor.firstName"
+						:lastName="mentor.lastName"
+						:rate="mentor.hourlyRate"
+						:areas="mentor.areas"
+					></mentor-item>
+				</ul>
+				<h3 v-else>No Mentors Found</h3>
+			</base-card>
+		</section>
+	</div>
 </template>
 
 <script>
@@ -81,10 +85,12 @@ export default {
 		},
 	},
 	methods: {
-		async loadMentors() {
+		async loadMentors(refresh = false) {
 			this.isLoading = true;
 			try {
-				await this.$store.dispatch('mentors/loadMentors');
+				await this.$store.dispatch('mentors/loadMentors', {
+					forceRefresh: refresh,
+				});
 			} catch (error) {
 				this.error = error.message || 'Something went wrong!';
 			}

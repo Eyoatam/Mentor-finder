@@ -1,30 +1,36 @@
 <template>
-	<base-card>
-		<form @submit.prevent="submitForm">
-			<div class="form-control">
-				<label for="email">Your Email:</label>
-				<input type="email" v-model="email.val" @blur="updateValidityStatus" />
-			</div>
-			<p class="errors" v-if="!email.isValid">
-				an '@' is required in your email
-			</p>
-			<div class="form-cntrol">
-				<label for="message">Your Message:</label>
-				<textarea
-					id="message"
-					rows="5"
-					v-model="message.val"
-					@blur="updateValidityStatus"
-				></textarea>
-			</div>
-			<p class="errors" v-if="!message.isValid">
-				Please Enter a valid Information
-			</p>
-			<div class="actions">
-				<base-button>Send Message</base-button>
-			</div>
-		</form>
-	</base-card>
+	<div>
+		<base-card>
+			<form @submit.prevent="submitForm">
+				<div class="form-control">
+					<label for="email">Your Email:</label>
+					<input
+						type="email"
+						v-model="email.val"
+						@blur="updateValidityStatus"
+					/>
+				</div>
+				<p class="errors" v-if="!email.isValid">
+					an '@' is required in your email
+				</p>
+				<div class="form-cntrol">
+					<label for="message">Your Message:</label>
+					<textarea
+						id="message"
+						rows="5"
+						v-model="message.val"
+						@blur="updateValidityStatus"
+					></textarea>
+				</div>
+				<p class="errors" v-if="!message.isValid">
+					Please Enter a valid Information
+				</p>
+				<div class="actions">
+					<base-button>Send Message</base-button>
+				</div>
+			</form>
+		</base-card>
+	</div>
 </template>
 
 <script>
