@@ -1,10 +1,16 @@
 <template>
+	<base-dialog :show="!!error" title="An Error Occured!" @close="handleError">
+		<p>{{ error }}</p>
+	</base-dialog>
 	<section>
 		<base-card>
 			<header>
 				<h2>Requests Recieved</h2>
 			</header>
-			<ul v-if="hasRequests">
+			<div v-if="isLoading">
+				<base-spinner></base-spinner>
+			</div>
+			<ul v-else-if="hasRequests">
 				<requests-item
 					v-for="req in requests"
 					:key="req.id"
@@ -20,6 +26,12 @@
 <script>
 import RequestsItem from '../../components/requests/RequestsItem';
 export default {
+	data() {
+		return {
+			isLoading: false,
+			error: null,
+		};
+	},
 	components: {
 		RequestsItem,
 	},
@@ -30,6 +42,23 @@ export default {
 		hasRequests() {
 			return this.$store.getters['requests/hasRequests'];
 		},
+	},
+	methods: {
+		async loadRequests() {
+			this.isLoading = true;
+			try {
+				await this.$store.dispatch('requests/loadRequests');
+			} catch (error) {
+				this.error = error.message || 'Failed to fetch requests!';
+			}
+			this.isLoading = false;
+		},
+		handleError() {
+			this.error = null;
+		},
+	},
+	created() {
+		this.loadRequests();
 	},
 };
 </script>

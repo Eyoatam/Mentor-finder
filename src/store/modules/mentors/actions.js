@@ -9,25 +9,20 @@ export default {
     };
 
     const response = await fetch(
-      `https://mentor-finder-9fb3b.firebaseio.com/mentors/${userId}.jso`,
+      `https://mentor-finder-9fb3b.firebaseio.com/mentors/${userId}.json`,
       {
         method: 'PUT',
         body: JSON.stringify(mentorData)
       }
     );
 
+    const responseData = await response.json();
     if (!response.ok) {
-      /**
-       * @typedef PRODUCT
-       * @property {string} name.required - Products's name
-       * @property {string} vendor.required - Products's vendor
-       * @property {number} quantity.required - Products's quantity
-       * @property {number} price_per_item.required - Products's price per item
-       * @property {date} expiring_date - Products's expiring date
-       * @property {file} file - Products's image
-       */
+      const error = new Error(
+        responseData.message || 'Failed to Fetch, Please Try Again Later'
+      );
+      throw error;
     }
-    //  const responseData = await response.json();
 
     context.commit('addNewMentor', {
       ...mentorData,
