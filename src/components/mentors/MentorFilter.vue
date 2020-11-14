@@ -1,6 +1,6 @@
 <template>
 	<base-card>
-		<h2>Filter Coaches By</h2>
+		<h2>Filter Mentors By</h2>
 		<span class="filter-option">
 			<input type="checkbox" id="motivational" checked @change="setFilter" />
 			<label for="motivational">Motivational</label>
