@@ -19,7 +19,7 @@
 }
 
 .bouncer {
-	margin: 100px auto 0;
+	margin: 150px auto 0;
 	width: 70px;
 	text-align: center;
 }
@@ -28,7 +28,7 @@
 	width: 18px;
 	height: 18px;
 	background-color: #333;
-
+	padding: 2px;
 	border-radius: 100%;
 	display: inline-block;
 	-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -39,16 +39,19 @@
 	-webkit-animation-delay: -0.32s;
 	animation-delay: -0.32s;
 	background-color: #2c3e50;
+	margin: 0px 2px;
 }
 
 .bouncer .bounce2 {
 	background-color: #2c3e50;
 	-webkit-animation-delay: -0.16s;
 	animation-delay: -0.16s;
+	margin: 0px 2px;
 }
 
 .bouncer .bounce3 {
 	background-color: #2c3e50;
+	margin: 0px 2px;
 }
 
 @-webkit-keyframes sk-bouncedelay {

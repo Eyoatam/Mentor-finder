@@ -24,7 +24,7 @@ import MentorForm from '../../components/mentors/MentorForm.vue';
 export default {
 	data() {
 		return {
-			isLoading: false,
+			isLoading: true,
 			error: null,
 		};
 	},
@@ -41,7 +41,7 @@ export default {
 				this.error =
 					error.message || 'Failed To Regiseter, Please Try Again Later!!';
 			}
-			this.isLoading = false;
+			// this.isLoading = false;
 		},
 		handleError() {
 			this.error = null;
