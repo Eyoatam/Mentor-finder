@@ -10,7 +10,7 @@
 		<section>
 			<base-card>
 				<h2>Register as a Mentor Now!</h2>
-				<div v-if="isLoading">
+				<div v-if="isLoading" class="bouncer-container">
 					<base-loading></base-loading>
 				</div>
 				<mentor-form v-else @form-submitted="submitData"></mentor-form>
@@ -49,3 +49,9 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.bouncer-container {
+	margin-top: 200px;
+}
+</style>

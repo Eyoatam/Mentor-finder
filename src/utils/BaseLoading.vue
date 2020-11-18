@@ -19,7 +19,7 @@
 }
 
 .bouncer {
-	margin: 150px auto 0;
+	margin: 10px auto 0;
 	width: 70px;
 	text-align: center;
 }

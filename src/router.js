@@ -4,6 +4,7 @@ import MentorsList from './pages/mentors/MentorsList.vue';
 import MentorRegisteration from './pages/auth/Register.vue';
 import ContactMentor from './pages/requests/ContactMentor.vue';
 import RecievedRequests from './pages/requests/RecievedRequests.vue';
+import Login from './pages/auth/Login.vue';
 import NotFound from './pages/NotFound.vue';
 
 const router = createRouter({
@@ -18,6 +19,7 @@ const router = createRouter({
       children: [{ path: 'contact', component: ContactMentor }]
     },
     { path: '/register', component: MentorRegisteration },
+    { path: '/login', component: Login },
     { path: '/requests', component: RecievedRequests },
     { path: '/:notFound(.*)', component: NotFound }
   ]
