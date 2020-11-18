@@ -1,7 +1,13 @@
 <template>
 	<div>
-		<base-dialog :show="false" title="Registration Failed!">
-			<p>something went wrong</p>
+		<base-dialog
+			:show="!!error"
+			title="Authentication Failed!"
+			@close="handleError"
+		>
+			<p>
+				{{ error }}
+			</p>
 		</base-dialog>
 		<section>
 			<base-card>
@@ -9,28 +15,99 @@
 				<form>
 					<div class="form-control">
 						<label for="email">E-mail</label>
-						<input type="text" id="email" />
+						<input type="text" id="email" v-model.trim="email" />
 					</div>
 					<div class="form-control">
-						<label for="email">E-mail</label>
-						<input type="text" id="email" />
+						<label for="password">Password</label>
+						<input type="password" id="password" v-model.trim="password" />
 					</div>
 					<div class="btn-container">
-						<base-button>Login</base-button>
+						<base-button @click.prevent="submitForm">{{
+							submitButtonCaption
+						}}</base-button>
+						<base-button type="button" mode="flat" @click="switchAuthMode">{{
+							switchAuthModeButton
+						}}</base-button>
 					</div>
 					<div class="text">
-						<router-link to="/register"
-							>Already Have an account? Sign Up</router-link
-						>
+						<p v-if="!formIsValid">Please Enter a valid email and password</p>
 					</div>
 				</form>
-				<!-- <div>
+				<div v-if="isLoading">
 					<base-loading></base-loading>
-				</div> -->
+				</div>
 			</base-card>
 		</section>
 	</div>
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			email: '',
+			password: '',
+			formIsValid: true,
+			authMode: 'login',
+			error: null,
+			isLoading: false,
+		};
+	},
+	computed: {
+		submitButtonCaption() {
+			if (this.authMode === 'login') {
+				return 'Login';
+			} else {
+				return 'Signup';
+			}
+		},
+		switchAuthModeButton() {
+			if (this.authMode === 'login') {
+				return 'Signup Instead';
+			} else {
+				return 'Login Instead';
+			}
+		},
+	},
+	methods: {
+		async submitForm() {
+			this.formIsValid = true;
+			if (
+				this.email === '' ||
+				!this.email.includes('@') ||
+				this.password.length < 6
+			) {
+				this.formIsValid = false;
+				return;
+			}
+			this.isLoading = true;
+			try {
+				if (this.mode === 'login') {
+					// this.$store.dispatch('login');
+				} else {
+					await this.$store.dispatch('signup', {
+						email: this.email,
+						password: this.password,
+					});
+				}
+			} catch (error) {
+				this.error = error.message || 'Failed to Authenticate';
+			}
+			this.isLoading = false;
+		},
+		switchAuthMode() {
+			if (this.authMode === 'login') {
+				this.authMode = 'signup';
+			} else {
+				this.authMode = 'login';
+			}
+		},
+		handleError() {
+			this.error = null;
+		},
+	},
+};
+</script>
 
 <style scoped>
 form {
