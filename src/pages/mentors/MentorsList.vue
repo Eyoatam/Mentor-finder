@@ -12,8 +12,17 @@
 					<base-button mode="outlined" @click="loadMentors(true)"
 						>Refresh</base-button
 					>
-					<base-button v-if="!isMentor && !isLoading" link to="/register"
-						>register as a mentor</base-button
+					<base-button
+						v-if="isLoggedIn && !isMentor && !isLoading"
+						link
+						to="/register"
+						>Register as a mentor</base-button
+					>
+					<base-button
+						v-if="!isLoggedIn"
+						link
+						to="/auth/login?redirect=register"
+						>Login to register as a mentor</base-button
 					>
 				</div>
 				<div v-if="isLoading">
@@ -39,10 +48,12 @@
 <script>
 import MentorItem from '../../components/mentors/MentorItem.vue';
 import MentorFilter from '../../components/mentors/MentorFilter.vue';
+import BaseButton from '../../utils/BaseButton.vue';
 export default {
 	components: {
 		MentorItem,
 		MentorFilter,
+		BaseButton,
 	},
 	data() {
 		return {
@@ -56,6 +67,9 @@ export default {
 		};
 	},
 	computed: {
+		isLoggedIn() {
+			return this.$store.getters.isAuthenticated;
+		},
 		isMentor() {
 			return this.$store.getters['mentors/isMentor'];
 		},

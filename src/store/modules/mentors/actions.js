@@ -8,8 +8,10 @@ export default {
       areas: payload.areas
     };
 
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://mentor-finder-9fb3b.firebaseio.com/mentors/${userId}.json`,
+      `https://mentor-finder-9fb3b.firebaseio.com/mentors/${userId}.json?auth=` +
+        token,
       {
         method: 'PUT',
         body: JSON.stringify(mentorData)

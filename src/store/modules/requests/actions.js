@@ -26,8 +26,10 @@ export default {
   },
   async loadRequests(context) {
     const mentorId = context.rootGetters.userId;
+    const token = context.rootGetters.token;
     const response = await fetch(
-      `https://mentor-finder-9fb3b.firebaseio.com/requests/${mentorId}.json`
+      `https://mentor-finder-9fb3b.firebaseio.com/requests/${mentorId}.json?auth=` +
+        token
     );
     const responseData = await response.json();
 
