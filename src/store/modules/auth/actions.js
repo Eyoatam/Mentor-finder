@@ -1,18 +1,7 @@
 let timer;
 export default {
-  async login(context, payload) {
-    return context.dispatch('auth', {
-      ...payload,
-      mode: 'login'
-    });
-  },
-  async signup(context, payload) {
-    return context.dispatch('auth', {
-      ...payload,
-      mode: 'signup'
-    });
-  },
   async auth(context, payload) {
+    // api call part to another folder
     const mode = payload.mode;
     let url =
       'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDjAlfi_n9lO4RNGEaOS21CNoEqM8szf9s';

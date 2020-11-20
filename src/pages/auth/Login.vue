@@ -81,15 +81,19 @@ export default {
 				return;
 			}
 			this.isLoading = true;
-			const payload = {
-				email: this.email,
-				password: this.password,
-			};
 			try {
 				if (this.authMode === 'login') {
-					this.$store.dispatch('login', payload);
+					this.$store.dispatch('auth', {
+						email: this.email,
+						password: this.password,
+						mode: 'login',
+					});
 				} else {
-					await this.$store.dispatch('signup', payload);
+					await this.$store.dispatch('auth', {
+						email: this.email,
+						password: this.password,
+						mode: 'login',
+					});
 				}
 				const redirectQuery = '/' + (this.$route.query.redirect || 'mentors');
 				this.$router.replace(redirectQuery);
