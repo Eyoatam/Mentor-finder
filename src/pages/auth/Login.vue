@@ -51,6 +51,8 @@ export default {
 			authMode: 'login',
 			error: null,
 			isLoading: false,
+			// the below data propert is to test github actions
+			test: false,
 		};
 	},
 	computed: {
