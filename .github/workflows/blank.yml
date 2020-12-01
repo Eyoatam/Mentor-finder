@@ -17,7 +17,7 @@ jobs:
         run: yarn install
 
   automerge: 
-      name: Merge dependabot pull requests
+      name: Merge my pull requests
       runs-on: [ubuntu-latest]
       needs: [build]
       if: github.base_ref == 'master' && github.author == 'Eyoatam'
