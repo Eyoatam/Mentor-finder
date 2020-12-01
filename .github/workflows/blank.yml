@@ -1,4 +1,4 @@
-name: Test CI
+name: CI
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
       name: Merge dependabot pull requests
       runs-on: [ubuntu-latest]
       needs: [build]
-      if: github.base_ref == 'master' && github.author == 'Eyoatam'
+      if: github.base_ref == 'master' && github.author == 'dependabot[bot]'
       steps:
         - name: GitHub Script
           uses: actions/github-script@v3.1.0
