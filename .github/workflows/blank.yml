@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: installd deps
+      - name: install dependencies
         run: yarn install
 
   automerge: 
       name: Merge dependabot pull requests
       runs-on: [ubuntu-latest]
       needs: [build]
-      if: github.base_ref == 'master' && github.author == 'dependabot[bot]'
+      if: github.base_ref == 'master' && github.author == 'Eyoatam'
       steps:
         - name: GitHub Script
           uses: actions/github-script@v3.1.0
