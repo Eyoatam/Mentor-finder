@@ -22,8 +22,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: echo "Installing Dependencies..."
-    - run: yarn install
+    - run:  echo "Installing Dependencies..." yarn install
       
   build:
 
@@ -39,5 +38,4 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: echo "Running yarn build..."
-    - run: yarn build
+    - run: echo "Running yarn build..." yarn build
