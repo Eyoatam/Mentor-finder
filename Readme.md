@@ -2,6 +2,8 @@
 
 ## Project Setup
 
+> Note: If You Are Using `npm` You Should delete the `yarn.lock` file
+
 ```bash
 # Clone to this repo
 git clone git@github.com:Eyoatam/Mentor-finder-web.git
