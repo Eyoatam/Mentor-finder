@@ -8,7 +8,7 @@ export default {
   isMentor(_, getters, _2, rootGetters) {
     const mentors = getters.mentors;
     const userId = rootGetters.userId;
-    return mentors.some(mentor => mentor.id === userId);
+    return mentors.some((mentor) => mentor.id === userId);
   },
   updateMentors(state) {
     const lastFetch = state.lastFetch;
@@ -18,5 +18,5 @@ export default {
       const currentTimestamp = new Date().getTime();
       return (currentTimestamp - lastFetch) / 1000 > 60;
     }
-  }
+  },
 };

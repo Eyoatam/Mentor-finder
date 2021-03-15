@@ -6,5 +6,5 @@ export default {
   },
   loggedOut(state) {
     state.loggedOut = true;
-  }
+  },
 };

@@ -10,5 +10,5 @@ export default {
   },
   didLogOut(state) {
     return state.loggedOut;
-  }
+  },
 };

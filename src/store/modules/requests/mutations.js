@@ -4,5 +4,5 @@ export default {
   },
   fetchRequests(state, payload) {
     state.requests = payload;
-  }
+  },
 };

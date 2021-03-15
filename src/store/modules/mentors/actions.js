@@ -5,7 +5,7 @@ export default {
       firstName: payload.first,
       lastName: payload.last,
       description: payload.desc,
-      areas: payload.areas
+      areas: payload.areas,
     };
 
     const token = context.rootGetters.token;
@@ -13,22 +13,22 @@ export default {
       `https://mentor-finder-9fb3b.firebaseio.com/mentors/${userId}.json?auth=` +
         token,
       {
-        method: 'PUT',
-        body: JSON.stringify(mentorData)
-      }
+        method: "PUT",
+        body: JSON.stringify(mentorData),
+      },
     );
 
     const responseData = await response.json();
     if (!response.ok) {
       const error = new Error(
-        responseData.message || 'Failed to Fetch, Please Try Again Later'
+        responseData.message || "Failed to Fetch, Please Try Again Later",
       );
       throw error;
     }
 
-    context.commit('addNewMentor', {
+    context.commit("addNewMentor", {
       ...mentorData,
-      id: userId
+      id: userId,
     });
   },
   async loadMentors(context, payload) {
@@ -36,12 +36,13 @@ export default {
       return;
     }
     const response = await fetch(
-      `https://mentor-finder-9fb3b.firebaseio.com/mentors.json`
+      `https://mentor-finder-9fb3b.firebaseio.com/mentors.json`,
     );
     const responseData = await response.json();
     if (!response.ok) {
       const error = new Error(
-        responseData.message || 'Whoops! Something Went Wrong, Please Try Again'
+        responseData.message ||
+          "Whoops! Something Went Wrong, Please Try Again",
       );
       throw error;
     }
@@ -52,11 +53,11 @@ export default {
         firstName: responseData[id].firstName,
         lastName: responseData[id].lastName,
         description: responseData[id].description,
-        areas: responseData[id].areas
+        areas: responseData[id].areas,
       };
       mentors.push(mentor);
     }
-    context.commit('fetchMentors', mentors);
-    context.commit('setTimestamp');
-  }
+    context.commit("fetchMentors", mentors);
+    context.commit("setTimestamp");
+  },
 };
